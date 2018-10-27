@@ -1863,3 +1863,36 @@ if(!Function.prototype.bind){
     };
 }
 
+
+//cookie读取缓存操作
+function getCookie(c_name)
+{
+    if (document.cookie.length>0)
+    {
+        var c_start = document.cookie.indexOf(c_name + "=")
+        if (c_start!=-1)
+        {
+            c_start=c_start + c_name.length+1
+            var c_end=document.cookie.indexOf(";",c_start)
+            if (c_end==-1) c_end=document.cookie.length
+            return unescape(document.cookie.substring(c_start,c_end))
+        }
+    }
+    return ""
+}
+//存储cookie
+function setCookie(c_name,value)
+{
+    var expire= new Date();
+    var expiresDate = expire.setTime(expire.getTime() + (30 * 60 * 1000));
+    if(navigator.userAgent.indexOf("MSIE 8.0") != -1){
+        $.cookie(c_name,value,{expires:1,path:'/'});
+    }else {
+        $.cookie(c_name,value,{expires:expiresDate,path:'/'});
+    }
+}
+//删除cookie
+function clearCookie(name,jsonHead) {
+    setCookie(name, "", -1);
+}
+
