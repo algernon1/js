@@ -1896,3 +1896,19 @@ function clearCookie(name,jsonHead) {
     setCookie(name, "", -1);
 }
 
+
+
+//scrollDivId   滚动的div的id  表头锁定
+function nayiLock(scrollDivId){
+    jQuery("#" + scrollDivId).scroll(function(){
+        var left = jQuery("#" + scrollDivId).scrollLeft();
+        jQuery(this).find(".lock-col").each(function(){
+            jQuery(this).css({"position":"relative","left":left,"background-color":"white","z-index":jQuery(this).hasClass("lock-row")?20:10});
+        });
+
+        var top = jQuery("#" + scrollDivId).scrollTop();
+        jQuery(this).find(".lock-row").each(function(){
+            jQuery(this).css({"position":"relative","top":top,"background-color":"white","z-index":jQuery(this).hasClass("lock-col")?20:9});
+        });
+    });
+}
