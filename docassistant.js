@@ -7848,7 +7848,7 @@ function clsParentChildTableCtrl$parse() {
                         childCloneRow.style.display = "";
                         childCloneRow.jsonData = jsonCItem;
                         childCloneRow.jsonPData = jsonItem;
-                        this.childProgress(jsonCItem, childCloneRow, jsonItem);
+                        this.childProgress(jsonCItem, childCloneRow, jsonItem, cloneRow);
                         //如果有序号字段，则赋值
                         if (this.idx != null)
                             $(childCloneRow).find("#" + this.idx).html(mI + 1);
@@ -7994,7 +7994,7 @@ function clsParentChildTableCtrl$before() {
 function clsParentChildTableCtrl$progress(jsonItem, cloneRow) {
 }
 
-function clsParentChildTableCtrl$childProgress(jsonItem, cloneRow) {
+function clsParentChildTableCtrl$childProgress(jsonCItem, childCloneRow, jsonItem, cloneRow) {
 }
 
 function clsParentChildTableCtrl$after() {
