@@ -8702,7 +8702,7 @@ function clsColsCtrl$after()
 }
 
 
-//公用方法
+//公用ajax请求方法
 function getAjaxResult(strPath, method, param, callbackMethod, beforeSendFunc, asyncType) {
     var strPath = (requestUrl == null) ? strPath : requestUrl + strPath;
     var operId = (param.operId == null) ? "" : param.operId;
@@ -8735,6 +8735,44 @@ function getAjaxResult(strPath, method, param, callbackMethod, beforeSendFunc, a
     });
 }
 
+//公用ajax请求方法(改良)
+function getAjaxResultNew(options) {//strPath, method, param, callbackMethod, beforeSendFunc, asyncType, obj
+    option = options || "";
+    if(!options){
+        alert("入参有误");
+        return;
+    }
+    var strPath = (requestUrl == null) ? options.strPath : requestUrl + options.strPath;
+    var operId = (options.param.operId == null) ? "" : options.param.operId;
+    jsonReqHeaderData.operTitle = operId;
+    var reqParam = {"reqHeader": jsonReqHeaderData};
+    reqParam["reqBody"] = options.param;
+    options.asyncType = options.asyncType || false;
+    $.ajax({
+        url: options.strPath,
+        type: options.method,
+        async: options.asyncType,
+        cache: false,
+        data: JSON.stringify(reqParam),
+        dataType: 'text',
+        obj:options.obj,
+        contentType: 'application/json',
+        beforeSend: options.beforeSendFunc ? options.beforeSendFunc : function () {
+        },
+        success: function (data) {
+            if (typeof(options.callbackMethod) == "string") {
+                eval(options.callbackMethod);
+            } else if (typeof(options.callbackMethod) == "function") {
+                options.callbackMethod(data);
+            }
+            var jsonResultData = JSON.parse(data);
+            jumpUrl(null, jsonResultData.retCode, null, jsonResultData);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+        }
+    });
+}
 
 /*获取数据通用*/
 function setValue4Desc(jsonItem, cloneRow) {
