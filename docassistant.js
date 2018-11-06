@@ -8736,7 +8736,7 @@ function getAjaxResult(strPath, method, param, callbackMethod, beforeSendFunc, a
 }
 
 //公用ajax请求方法(改良)
-function getAjaxResultNew(options) {//strPath, method, param, callbackMethod, beforeSendFunc, asyncType, obj
+function getAjaxResultNew(options) {//strPath, method, param, callbackMethod, beforeSendFunc, asyncType, ctrl
     option = options || "";
     if(!options){
         alert("入参有误");
@@ -8755,7 +8755,7 @@ function getAjaxResultNew(options) {//strPath, method, param, callbackMethod, be
         cache: false,
         data: JSON.stringify(reqParam),
         dataType: 'text',
-        obj:options.obj,
+        ctrl:options.ctrl,
         contentType: 'application/json',
         beforeSend: options.beforeSendFunc ? options.beforeSendFunc : function () {
         },
