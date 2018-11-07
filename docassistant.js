@@ -2125,8 +2125,8 @@ function clsStandardTableCtrl$parse() {
 
         if (this.jsonData.resultData != null) 
 		{
-			if(this.isCacheCond != null)
-				this.ctrl.cacheArr = new Array();
+			/*if(this.isCacheCond != null)
+				this.ctrl.cacheArr = new Array();*/
 			for (var nI = 0; nI < this.jsonData.resultData.length; nI++) {
                 var jsonItem = this.jsonData.resultData[nI];
                 var cloneRow = templateRow.cloneNode(true);
